@@ -39,7 +39,7 @@ const batch = [
 ];
 
 // Add your functions below:
-const validateCred = (arr) => {
+const validateCred = arr => {
   let sum = 0;
   let idx = 1;
   while (arr.length > 0) {
@@ -54,4 +54,11 @@ const validateCred = (arr) => {
   return sum % 10 == 0;
 };
 
-batch.forEach((arr) => console.log(validateCred(arr)));
+//batch.forEach((arr) => console.log(validateCred(arr)));
+
+cosnt findInvalidCards = nestedArr => {
+    return nestedArr.filter(arr => validateCred(arr))
+}
+
+a = findInvalidCards(batch)
+a
