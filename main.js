@@ -1,3 +1,5 @@
+// Add any card number you want to check as a const arrName = [int,int...] and add arrName to batch
+
 // All valid credit card numbers
 const valid1 = [4, 5, 3, 9, 6, 7, 7, 9, 0, 8, 0, 1, 6, 8, 0, 8];
 const valid2 = [5, 5, 3, 5, 7, 6, 6, 7, 6, 8, 7, 5, 1, 4, 3, 9];
@@ -40,7 +42,7 @@ const batch = [
 
 // Add your functions below:
 const validateCred = (card) => {
-  tempCard = card.slice()
+  tempCard = card.slice();
   let sum = 0;
   let idx = 1;
   while (tempCard.length > 0) {
@@ -56,25 +58,30 @@ const validateCred = (card) => {
 //batch.forEach((arr) => console.log(validateCred(arr)));
 
 const findInvalidCards = (cards) => {
-  return cards.filter(card => !validateCred(card))
+  return cards.filter((card) => !validateCred(card));
 };
 
-const findCompanies = invalidCards => {
+const findCompanies = (invalidCards) => {
   cardInfo = {
     3: "Amex",
     4: "visa",
     5: "Master Card",
     6: "Visa",
-    'other': "Company not found",
+    other: "Company not found",
   };
   result = {};
-  invalidCards.forEach(invalidCard => {
-    invalidCard[0] in cardInfo ?  checker = invalidCard[0]: checker = 'other'
-    checker in cardInfo && !checker in result ? Object.assign(result,{checker:cardInfo.checker}) : result
+  invalidCards.forEach((invalidCard) => {
+    invalidCard[0] in cardInfo
+      ? (checker = invalidCard[0])
+      : (checker = "other");
+    if (checker in cardInfo && !(checker in result)) {
+      Object.assign(result, { [checker]: cardInfo[checker] });
+    }
   });
-  return Object.values(result)
-}
+  return Object.values(result);
+};
 
 const invalidCards = findInvalidCards(batch);
-const invalidCom= findCompanies(invalidCards);
-console.log(invalidCom)
+const invalidCom = findCompanies(invalidCards);
+console.log("Following companies issued invalid cards \n");
+invalidCom.forEach((com) => console.log(com));
