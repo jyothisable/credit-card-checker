@@ -59,4 +59,22 @@ const findInvalidCards = (cards) => {
   return cards.filter(card => !validateCred(card))
 };
 
-console.log(findInvalidCards(batch));
+const findCompanies = invalidCards => {
+  cardInfo = {
+    3: "Amex",
+    4: "visa",
+    5: "Master Card",
+    6: "Visa",
+    'other': "Company not found",
+  };
+  result = {};
+  invalidCards.forEach(invalidCard => {
+    invalidCard[0] in cardInfo ?  checker = invalidCard[0]: checker = 'other'
+    checker in cardInfo && !checker in result ? Object.assign(result,{checker:cardInfo.checker}) : result
+  });
+  return Object.values(result)
+}
+
+const invalidCards = findInvalidCards(batch);
+const invalidCom= findCompanies(invalidCards);
+console.log(invalidCom)
